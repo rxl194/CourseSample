@@ -7,3 +7,6 @@ npm install yargs@3.15.0
 npm install crypto-js@3.1.5 --save
 
 
+nodejs app.js create
+nodejs app.js create -n Twitter -u AndrewJ -p p123 -m masterP
+nodejs app.js get -n Twitter -m masterP

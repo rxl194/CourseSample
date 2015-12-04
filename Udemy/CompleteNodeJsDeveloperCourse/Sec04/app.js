@@ -1,5 +1,7 @@
 console.log('starting password manager');
 
+var crypto = require('crypto-js');
+
 var storage = require('node-persist');
 storage.initSync();
 
@@ -85,31 +87,47 @@ accounts.push({
 // account.password, Password123!
 
 function getAccounts(masterPassword) {
+  // use getItemSync to fetch accounts
+	var encryptedAccount = storage.getItemSync('accounts');
+  var accounts;
+  
+  // decrypt
+	if (typeof encryptedAccount === 'undefined' ) {
+		accounts = [];
+  } else {
+    var bytes = crypto.AES.decrypt(encryptedAccount, masterPassword);
+    accounts = JSON.parse(bytes.toString(crypto.enc.Utf8));
+  }
+
+  // return account array
+  return accounts;
+  
 }
 
 
 function saveAccounts(accounts, masterPassword) {
+  // encrypt accounts
+  var encryptedAccounts = crypto.AES.encrypt(JSON.stringify(accounts), masterPassword);
+
+  // setItemSync
+	storage.setItemSync('accounts', encryptedAccounts.toString());
+
+  return accounts;
 }
 
 
 function createAccount (account, masterPassword) {
-	var accounts = storage.getItemSync('accounts');
-
-	if (typeof accounts === 'undefined' ) 
-		accounts = [];
+	var accounts = getAccounts(masterPassword);
 
 	accounts.push(account);
-	storage.setItemSync('accounts',accounts);
+  saveAccounts(accounts, masterPassword);
 
-	return accounts;
+	return account;
 }
 
 function getAccount(accountName, masterPassword) {
-	var accounts = storage.getItemSync('accounts');
+	var accounts = getAccounts(masterPassword);
 	var matchedAccount;
-
-	if (typeof accounts === 'undefined' ) 
-		accounts = [];
 
 	// iterate over array, return matching account, else undefined
 	accounts.forEach(function(account) {
@@ -135,21 +153,29 @@ console.log(facebookAccount);
 */
 
 if (command === 'create') {
-	var createdAccount = createAccount({
-		name: argv.name,
-		username: argv.username,
-		password: argv.password
-	}, argv.masterPassword);
-	console.log('Account created');
-	console.log(createdAccount);
+  try {
+	  var createdAccount = createAccount({
+		  name: argv.name,
+		  username: argv.username,
+		  password: argv.password
+	  }, argv.masterPassword);
+	  console.log('Account created');
+	  console.log(createdAccount);
+  } catch (e) {
+    console.log('Unable to create account: ' + e.message);
+  }
 } else if (command === 'get') {
-	var fetchedAccount = getAccount(argv.name, argv.masterPassword);
-	if (typeof fetchedAccount === 'undefined') {
-		console.log('Account not found');
-	} else {
-		console.log('Account found!');
-		console.log(fetchedAccount);
-	}
+  try {
+	  var fetchedAccount = getAccount(argv.name, argv.masterPassword);
+	  if (typeof fetchedAccount === 'undefined') {
+		  console.log('Account not found');
+	  } else {
+		  console.log('Account found!');
+		  console.log(fetchedAccount);
+	  }
+  } catch (e) {
+    console.log('Unable to fetch account: ' + e.message);
+  }
 } else {
 	console.log('Unkown command: ' + command);
 }
