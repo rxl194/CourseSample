@@ -9,6 +9,7 @@
   "author": "",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "request": "~2.60.0"
+    "request": "~2.60.0",
+    "yargs": "~3.15.0"
   }
 }
