@@ -4,3 +4,5 @@
   npm install request@2.60.0 --save
   nodejs example-callback.js 
   npm install yargs@3.15.0
+  npm install promise
+  npm install bluebird
