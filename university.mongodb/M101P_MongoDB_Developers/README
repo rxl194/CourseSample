@@ -1,0 +1,36 @@
+
+   git clone https://github.com/rxl194/CourseSample
+   cd CourseSample/
+
+   sudo apt-get install node npm
+   python
+   pip
+
+  sudo apt-get install python-pip python-dev build-essential
+  sudo pip install --upgrade pip
+  which pip
+  pip install bottle
+  pip install pymongo
+  git pull origin master
+  mkdir university.mongodb
+  git status
+  vi .gitignore
+  git status
+  git add .gitignore 
+  cd ../..
+
+  git add university.mongodb/
+  sudo apt-get install awscli
+  aws configure
+  vi ~/.aws/config 
+  aws s3 ls s3:s3-tst-1/
+  aws s3 cp s3://s3-tst-1/hello_bottle.7bfada66cb77.py .
+
+  vi hello_bottle.py 
+  python hello_bottle.py 
+  ls -l
+  aws s3 cp s3://s3-tst-1/pymongo_getting_started.py
+  aws s3 cp s3://s3-tst-1/pymongo_getting_started.py .
+  mongo
+  git commit -am "M101p"
+  git push origin master
