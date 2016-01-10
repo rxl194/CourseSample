@@ -1,0 +1,15 @@
+ sudo npm install –g mocha
+ npm install mocha --save
+
+./node_modules/.bin/mocha test.js 
+./node_modules/.bin/mocha -R dot test.js 
+./node_modules/.bin/mocha -g "fail" test.js
+./node_modules/.bin/mocha test.js 
+
+npm test
+npm run test-kitten
+
+./node_modules/.bin/gulp test
+ ./node_modules/.bin/gulp watch
+
+
