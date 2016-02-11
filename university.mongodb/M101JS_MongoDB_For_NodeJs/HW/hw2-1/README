@@ -3,4 +3,17 @@ mongorestore dump
  db.movieDetails.find({ "countries.1": "Sweden" }).limit(1)
  db.movieDetails.findOne({"countries.1": "Sweden"}, {"title":1})
 
+ /* Equality queries on arrays 
+ How many documents in our movieDetails collection are listed as 
+ falling into just the following two genres: "Comedy" and "Crime" with "Comedy" listed first
+ */
+ db.movieDetails.find({'genres': {$all: ['Comedy','Crime'], $size: 2}}).count()
+ db.movieDetails.find({ "genres": ["Comedy", "Crime"] }).count()
+
+
+ /* 
+ How many documents in the movieDetails collection list 
+  both "Comedy" and "Crime" as genres regardless of how many other genres are listed?
+ */
+ db.movieDetails.find({ "genres": {$all: ["Comedy", "Crime"] } })
 
