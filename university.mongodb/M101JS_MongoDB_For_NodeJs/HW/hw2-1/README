@@ -1,0 +1,4 @@
+mongorestore dump
+ db.movieDetails.find({ "rated": "PG-13", "year": 2013, "awards.wins": 0}) 
+
+
