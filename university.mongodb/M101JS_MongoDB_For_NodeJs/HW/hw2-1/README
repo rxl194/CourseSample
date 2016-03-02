@@ -1,5 +1,6 @@
 mongorestore dump
  db.movieDetails.find({ "rated": "PG-13", "year": 2013, "awards.wins": 0}) 
+ {"awards.oscars.award": "bestPicture"}
  db.movieDetails.find({ "countries.1": "Sweden" }).limit(1)
  db.movieDetails.findOne({"countries.1": "Sweden"}, {"title":1})
 
