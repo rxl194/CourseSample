@@ -1,2 +1,12 @@
 
 mongoimport --port=<port> -d crunchbase -c companies companies.json
+
+show dbs;
+use crunchbase
+show collections
+db.companies.find().count()
+
+
+cursor.project({"name": 1, "number_of_employees": 1, "_id": 0});
+
+
