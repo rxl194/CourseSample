@@ -1,0 +1,43 @@
+function queryDocument(options) {
+
+    var query = {
+        "tag_list": {"$regex": "social-networking"},
+    };
+
+    if (("firstYear" in options) && ("lastYear" in options)) {
+        query.founded_year = { "$gte": options.firstYear, "$lte": options.lastYear };
+    } else if ("firstYear" in options) {
+        query.founded_year = { "$gte": options.firstYear };
+    } else if ("lastYear" in options) {
+        query.founded_year = { "$lte": options.lastYear };
+    }
+
+    if ("city" in options) {
+        query["offices.city"] = options.city;
+    }
+        
+    return query;
+    
+}
+
+
+function queryDocument(options) {
+
+    var query = {};
+
+    if ("overview" in options) {
+        query["$or"] = [
+            {"overview": {"$regex": options.overview, "$options": "i"}},
+            {"tag_list": {"$regex": options.overview, "$options": "i"}}
+        ];
+    }
+
+    if ("milestones" in options) {
+        query["milestones.source_description"] =
+            {"$regex": options.milestones, "$options": "i"};
+    }
+
+    return query;
+    
+}
+
