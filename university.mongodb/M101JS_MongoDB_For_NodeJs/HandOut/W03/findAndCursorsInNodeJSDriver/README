@@ -1,0 +1,2 @@
+
+mongoimport --port=<port> -d crunchbase -c companies companies.json
