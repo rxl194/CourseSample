@@ -1,0 +1,16 @@
+$ npm install karma -g
+$ karma -–version
+$ karma init
+$ karma start
+
+# NEW PROJECT
+
+$ npm install bower -g
+$ bower init
+
+$ bower install angular
+$ bower install angular-mocks
+$ bower install angular-mocks
+
+$ karma init
+$ karma start
