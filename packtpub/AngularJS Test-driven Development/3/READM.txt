@@ -1,0 +1,12 @@
+
+# ~\AppData\Roaming\npm\node_modules
+
+$ npm install protractor -g
+$ webdriver-manager update
+
+$ copy 2/app 2/spec karma.conf.js bower.json .
+
+$ protractor chromeOnlyConf.js
+
+$ npm install http-server
+$ http-server -p 8080 (index.html)
