@@ -1,0 +1,1 @@
+db.products.find({"type": "case", "for": "ac9"})
