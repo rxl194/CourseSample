@@ -1,0 +1,5 @@
+
+db.products.update({_id : ObjectId("507d95d5719dbef170f15c00")}, {$set: {"limi
+ts.sms.over_rate":0.01}})
+
+db.products.find({"limits.voice": {$exists:true}}).count()
