@@ -1,5 +1,4 @@
 var fs = require('fs');
-var fx = require('./fx');
 var Stripe = require('stripe');
 
 module.exports = function(wagner) {
@@ -11,7 +10,9 @@ module.exports = function(wagner) {
     return Stripe(process.env.STRIPE_API_KEY);
   });
 
-  wagner.factory('fx', fx);
+  wagner.factory('fx', function(Config) {
+    return require('./fx')(Config);
+  });
 
   wagner.factory('Config', function() {
     return JSON.parse(fs.readFileSync('./config.json').toString());
